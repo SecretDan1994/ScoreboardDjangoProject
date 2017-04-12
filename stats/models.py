@@ -43,6 +43,7 @@ class GameServer(OrderedModel):
 class LogTag(models.Model):
     name = models.CharField(unique=True,max_length=50)
     pretty = models.TextField(blank=True)
+    spy = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
@@ -52,17 +53,31 @@ class ServerLog(models.Model):
     data = JSONField()
     server = models.ForeignKey(GameServer, related_name='logs', on_delete=models.PROTECT)
     time = models.DateTimeField(default=timezone.now)
-    tags = models.ManyToManyField(LogTag)
+    tag = models.ForeignKey(LogTag)
 
     @property
     def pretty_print_log(self):
-        pretty = self.tags.all()[0].pretty
+        pretty = self.tag.pretty
         if pretty:
             template = Template(pretty)
             context = Context(self.data)
-            return template.render(context)
+            return "{0} | {1}".format(self.time.strftime('%H:%M:%S'), template.render(context))
         else:
-            return "{0}".format(self.data)
+            return False
+
+    @property
+    def spy_print_log(self):
+        spy = self.tag.spy or self.tag.pretty
+        if spy:
+            template = Template(spy)
+            context = Context(self.data)
+            return "{0} | {1}".format(self.time.strftime('%H:%M:%S'), template.render(context))
+        else:
+            return False
+
+    @property
+    def tech_print_log(self):
+        return "{0} | {1}: {2}".format(self.time.strftime('%H:%M:%S'), self.tag.name, self.data)# sort?
 
     def __str__(self):
         return "{0} {1}".format(self.server, self.time)

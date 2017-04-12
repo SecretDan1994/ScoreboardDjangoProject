@@ -164,6 +164,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+
 CLEAR_CACHE_ON_RESTART = True
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHES = {
@@ -183,14 +185,22 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgi_redis.RedisChannelLayer",
         "CONFIG": {
-            "hosts": ("unix:///var/run/redis/redis.sock",),
+            "hosts": ["unix:///var/run/redis/redis.sock"],
+            "capacity": 10000,
+            "channel_capacity": {
+                "websocket.send*": 10010,
+            },
         },
+#        "BACKEND": "asgi_ipc.IPCChannelLayer",
+#        "CONFIG": {
+#            "prefix": "community",
+#        },
         "ROUTING": "community.routing.channel_routing",
     },
 }
 
 # CELERY STUFF
-CELERY_BROKER_URL = 'redis+socket:///var/run/redis/redis.sock'
+BROKER_URL = 'redis+socket:///var/run/redis/redis.sock'
 CELERY_RESULT_BACKEND = 'redis+socket:///var/run/redis/redis.sock'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'

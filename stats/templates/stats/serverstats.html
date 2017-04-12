@@ -15,6 +15,7 @@
 
 <style type="text/css">
 
+/*
 *, html {
     margin:0;
     padding:0;  
@@ -28,7 +29,12 @@ table{
     width: 100%;
     table-layout: fixed;
 }
+*/
 
+.no-gutter {
+    padding:0px;
+    margin:0px;
+}
 
 .item-tag > span::before { 
     content: "[";
@@ -46,11 +52,11 @@ table{
 
 .table-terrorist{
     background-color:rgba(255,51,51,0.40);
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 .table-cterrorist{
     background-color:rgba(51,51,255,0.40);
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 .table-header{
     background-color:rgba(255,255,255,0.04);
@@ -72,7 +78,7 @@ table{
     margin: 5px 0 !important;
 }
 
-.table-spec>tbody>tr>td:hovr{
+.table-spec>tbody>tr>td:hover{
     background-color: #49515a;
 }
 .table-spec>tbody>tr>td:nth-chil(odd){
@@ -84,8 +90,12 @@ table{
 .table-spec>tbody>tr>td>.player-name:last-child:after{
     content: "";
 }
+.table-spec>tbody>tr>th{
+    white-space: nowrap;
+}
 .table-spec{
     background-color:rgba(255,255,255,0.40);
+    margin-bottom: 0px;
 }
 #override-color{
     background-color:#3e444c;
@@ -96,16 +106,7 @@ table{
 }
 
 /*-----------------MEDIA QUERIES-------------------------*/
-@media only screen and (max-width: 1199px) {
-
-    .col-md-6{
-        width: 0;
-    }
-
-    h1{
-        font-size: 29px;
-        font-weight: bold;
-    }
+@media only screen and (max-width: 437px) {
 
     #page-content-wrapper{
         display: table;
@@ -137,7 +138,7 @@ table{
                             <div class="col-sm-12">
                                 <h3>
                                     <strong>Stats</strong>
-                                    <p><small>Live scoreboard and logs for {{scoreboard.hostname}}.</small></p>
+                                    <p><small>Live scoreboard and logs for {{scoreboard.hostname}}. {% if gameserver.connected %}<span class="label label-success">Active</span>{% else %}<span class="label label-danger">Inactive</span>{% endif %}</small></p>
                                     <button type="button" class="btn btn-default btn-sm"><a href="..">Go back to Server List</a></button>
                                 </h3>
                             </div>
@@ -149,162 +150,156 @@ table{
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-sm-12">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Scoreboard
                         </div>
-                        <div class="panel-body" style="width: 100%; padding: 0px;border-top: 1px solid black;border-bottom: 5px;">
-                            <div class="col-lg-12" style="padding: 0px; width: 100%; margin: 4px 0 5px 0;">
-                                <table class="table table-header" style="margin:0px;border: black solid 0px;">
+                        <div class="panel-body" style="padding:0px"> 
+                            <div class="col-lg-6 no-gutter">
+
+                                <div class="pull-left"  style="padding: 4px;padding-left: 8px">
+                                    <h1 class="ct-wins" style="font-size: 22px; margin: 0"><strong>{{scoreboard.teams.3.name}}</strong></h1>
+                                    <h1 class="ct-wins" style="font-size: 14px; margin: 0;"><strong>Players Alive:<em>&nbsp;{{scoreboard.teams.3.alive_count}}/{{scoreboard.teams.3.player_count}}</em></strong></h1>
+                                </div>
+
+                                <div class="pull-right" style="padding: 4px;">                                                            
+                                    <h1 style="margin: 0;"><span id="ct-round-wins" class="ct-wins">{{scoreboard.teams.3.score}}</span><span style="margin-right: -0.25em;" class="hidden-md hidden-sm hidden-xs">&nbsp;:</span></h1>
+                                </div>
+
+                                <table class="table table-cterrorist table-hover" style="margin:0;border: black solid 0px;">
                                     <thead>
-                                      <tr class="scoreboard-header">
-                                        <th class="tableheader1" style="width: 14%;"></th>
-                                        <th class="tableheader2" style="width: 16%; padding-right: 4px;">  
-                                            <h1 style="margin: 0"> <span id="ct-title" class="ct-wins">{{scoreboard.teams.3}}</span></h1>
-                                        </th>
-                                        <th class="tableheader3" style="width: 17.7%;">
-                                            <p style="margin: 16px 0 0 0px; color: rgb(41,144,216);"><strong class="item"><span>Players Alive: </span></strong><em>{{ct_alive_count}}/{{ct_player_count}}</em></p>
-                                        </th>
-                                        <th class="tableheader4" style="width: 20%;">                                                            
-                                            <h1 style="margin: 0"> <span id="ct-round-wins" class="ct-wins">{{ct_round_wins}}</span> : <span id="t-round-wins" class="t-wins">{{t_round_wins}}</span></h1>
-                                        </th>
-                                        <th class="tableheader5" style="width: 8.5%; padding-right: 4px;">                                                            
-                                            <h1 style="margin: 0"> <span id="t-title" class="t-wins">{{scoreboard.teams.2}}</span></h1>
-                                        </th>
-                                        <th class="tableheader6" style="width: 23.8%;"> 
-                                            <p style="margin: 16px 0 0 0px; color: rgb(216,144,41);"><strong class="item"><span> Players Alive: </span></strong><em>{{t_alive_count}}/{{t_player_count}}</em></p>
-                                        </th>
+                                      <tr>
+                                        <th style="width: 1px"></th>
+                                        <th>Tag</th>
+                                        <th>Player Name</th>
+                                        <th></th>
+                                        <th>K</th>
+                                        <th>D</th>
+                                        <th>R</th>
+                                        <th>MVP</th>
                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for steamid, data in scoreboard.players.items %}
+                                            {% if data.team == 3 %}
+                                            <tr id="player_{{steamid}}" class="ct-player" style="width: 100%;">                                           
+                                                {% if data.alive == False %}
+                                                    <td></td>
+                                                    {% if data.tag %}
+                                                        <td><span style="color: #7a8288">{{data.tag}}</span></td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    <td><span style="color: #7a8288">{{data.name}}</span></td>
+                                                    <td>&#x1f480;</td>
+                                                    <td><span style="color: #7a8288">{{data.kills}}</span></td>
+                                                    <td><span style="color: #7a8288">{{data.deaths}}</span></td>
+                                                    <td><span style="color: #7a8288">{{data.kd}}</span></td>
+                                                {% else %}
+                                                    <td></td>
+                                                    {% if data.tag %}
+                                                        <td><span style="color: rgb(41,144,216)">{{data.tag}}</span></td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    <td><span style="color: rgb(41,144,216)">{{data.name}}</span></td>
+                                                    <td></td>
+                                                    <td><span style="color: rgb(41,144,216)">{{data.kills}}</span></td>
+                                                    <td><span style="color: rgb(41,144,216)">{{data.deaths}}</span></td>
+                                                    <td><span style="color: rgb(41,144,216)">{{data.kd}}</span></td>
+                                                {% endif %}
+                                                {% if data.mvp > 0 %}
+                                                    <td>&#x2b50;<sup style="color: rgb(240,180,18)">{{data.mvp}}</sup></td>
+                                                {% else %}
+                                                    <td></td>
+                                                {% endif %}
+                                            </tr>
+                                                {% endif %}
+                                        {% endfor %}
+                                    </tbody>    
+                                </table>
+                            </div>
+                            <div class="col-lg-6 no-gutter">
+
+                                <div class="pull-right hidden-md hidden-sm hidden-xs"  style="padding: 4px;padding-right: 8px">
+                                    <h1 class="t-wins" style="font-size: 22px; margin: 0"><strong>{{scoreboard.teams.2.name}}</strong></h1>
+                                    <h1 class="t-wins" style="font-size: 14px; margin: 0;"><strong>Players Alive:<em>&nbsp;{{scoreboard.teams.2.alive_count}}/{{scoreboard.teams.2.player_count}}</em></strong></h1>
+                                </div>
+
+                                <div class="pull-left hidden-md hidden-sm hidden-xs" style="padding: 4px;">                                                            
+                                    <h1 style="margin: 0;"><span style="margin-left: -0.25em;" class=>:&nbsp;</span><span id="t-round-wins" class="t-wins">{{scoreboard.teams.2.score}}</span></h1>
+                                </div>
+
+                                <div class="pull-left hidden-lg" style="padding: 4px;padding-left: 8px">
+                                    <h1 class="t-wins" style="font-size: 22px; margin: 0"><strong>{{scoreboard.teams.2.name}}</strong></h1>
+                                    <h1 class="t-wins" style="font-size: 14px; margin: 0;"><strong>Players Alive:<em>&nbsp;{{scoreboard.teams.2.alive_count}}/{{scoreboard.teams.2.player_count}}</em></strong></h1>
+                                </div>
+
+                                <div class="pull-right hidden-lg" style="padding: 4px;">                                                            
+                                    <h1 style="margin: 0;"><span id="t-round-wins" class="t-wins">{{scoreboard.teams.2.score}}</span></h1>
+                                </div>
+
+                                <table class="table table-terrorist table-hover" style="border: black solid 0px;">
+                                    <thead>
+                                      <tr>
+                                        <th style="width: 1px"></th>
+                                        <th>Tag</th>
+                                        <th>Player Name</th>
+                                        <th></th>
+                                        <th>K</th>
+                                        <th>D</th>
+                                        <th>R</th>
+                                        <th>MVP</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for steamid, data in scoreboard.players.items %}
+                                            {% if data.team == 2 %}
+                                            <tr id="player_{{steamid}}" class="t-player" style="width: 100%;">
+                                                {% if data.alive == False %}
+                                                    <td></td>
+                                                    {% if data.tag %}
+                                                        <td><span style="color: #7a8288">{{data.tag}}</span></td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    <td><span style="color: #7a8288">{{data.name}}</span></td>
+                                                    <td>&#x1f480;</td>
+                                                    <td><span style="color: #7a8288">{{data.kills}}</span></td>
+                                                    <td><span style="color: #7a8288">{{data.deaths}}</span></td>
+                                                    <td><span style="color: #7a8288">{{data.kd}}</span></td>
+                                                {% else %}
+                                                    <td></td>
+                                                    {% if data.tag %}
+                                                        <td><span style="color: rgb(216,144,41)">{{data.tag}}</span></td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    <td><span style="color: rgb(216,144,41)">{{data.name}}</span></td>
+                                                    <td></td>
+                                                    <td><span style="color: rgb(216,144,41)">{{data.kills}}</span></td>
+                                                    <td><span style="color: rgb(216,144,41)">{{data.deaths}}</span></td>
+                                                    <td><span style="color: rgb(216,144,41)">{{data.kd}}</span></td>
+                                                {% endif %}
+                                                {% if data.mvp > 0 %}
+                                                    <td>&#x2b50;<sup style="color: rgb(240,180,18)">{{data.mvp}}</sup></td>
+                                                {% else %}
+                                                    <td></td>
+                                                {% endif %}
+                                            </tr>
+                                            {% endif %}
+                                        {% endfor %}
                                     </tbody>
-                                  </table>
-                                </div>
+                                </table>
                             </div>
-                            <div class="double-table-wrapper" style="width: 100%">
-                                <div class="col-lg-6" style="padding: 0px;">
-                                    <table class="table table-cterrorist table-hover" style="margin:0;border: black solid 0px;">
-                                        <thead>
-                                          <tr class="ct-head-row">
-                                            <th class="left-head-ct"></th>
-                                            <th>Tag</th>
-                                            <th class="ct-name-head">Player Name</th>
-                                            <th></th>
-                                            <th>K</th>
-                                            <th>D</th>
-                                            <th>R</th>
-                                            <th>MVP</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for steam in sorted_list %}
-                                            {% for steamid, data in scoreboard.players.items %}
-                                                {% if steamid == steam %}
-                                                    {% ifequal data.team 3 %}
-                                                    <tr id="player_{{steamid}}" class="ct-player" style="width: 100%;">                                           
-                                                        {% if data.alive == False %}
-                                                            <td class="left-col-ct"></td>
-                                                            {% if data.tag %}
-                                                                <td><span style="color: #7a8288">{{data.tag}}</span></td>
-                                                            {% else %}
-                                                                <td></td>
-                                                            {% endif %}
-                                                            <td class=".ct-name"><span style="color: #7a8288">{{data.name}}</span></td>
-                                                            <td>&#x1f480;</td>
-                                                            <td><span style="color: #7a8288">{{data.kills}}</span></td>
-                                                            <td><span style="color: #7a8288">{{data.deaths}}</span></td>
-                                                            <td><span style="color: #7a8288">{{data.kd}}</span></td>
-                                                        {% else %}
-                                                            <td></td>
-                                                            {% if data.tag %}
-                                                                <td><span style="color: rgb(41,144,216)">{{data.tag}}</span></td>
-                                                            {% else %}
-                                                                <td></td>
-                                                            {% endif %}
-                                                            <td class=".ct-name"><span style="color: rgb(41,144,216)">{{data.name}}</span></td>
-                                                            <td></td>
-                                                            <td><span style="color: rgb(41,144,216)">{{data.kills}}</span></td>
-                                                            <td><span style="color: rgb(41,144,216)">{{data.deaths}}</span></td>
-                                                            <td><span style="color: rgb(41,144,216)">{{data.kd}}</span></td>
-                                                        {% endif %}
-                                                        {% if data.mvp > 0 %}
-                                                            <td>&#x2b50;<sup style="color: rgb(240,180,18)">{{data.mvp}}</sup></td>
-                                                        {% else %}
-                                                            <td class="left-col-ct"></td>
-                                                        {% endif %}
-                                                    </tr>
-                                                    {% endifequal %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endfor %}
-                                        </tbody>    
-                                    </table>
-                                </div>
-                                <div class="col-lg-6" style="padding: 0px;">
-                                    <table class="table table-terrorist table-hover" style="margin:0;border: black solid 0px;">
-                                        <thead>
-                                          <tr class="t-head-row">
-                                            <th class="left-head-t"></th>
-                                            <th>Tag</th>
-                                            <th class="t-name-head">Player Name</th>
-                                            <th></th>
-                                            <th>K</th>
-                                            <th>D</th>
-                                            <th>R</th>
-                                            <th>MVP</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for steam in sorted_list %}
-                                            {% for steamid, data in scoreboard.players.items %}
-                                                {% if steamid == steam %}
-                                                    {% ifequal data.team 2 %}
-                                                    <tr id="player_{{steamid}}" class="t-player" style="width: 100%;">
-                                                        {% if data.alive == False %}
-                                                            <td class="left-col-t"></td>
-                                                            {% if data.tag %}
-                                                                <td><span style="color: #7a8288">{{data.tag}}</span></td>
-                                                            {% else %}
-                                                                <td></td>
-                                                            {% endif %}
-                                                            <td class="t-name"><span style="color: #7a8288">{{data.name}}</span></td>
-                                                            <td>&#x1f480;</td>
-                                                            <td><span style="color: #7a8288">{{data.kills}}</span></td>
-                                                            <td><span style="color: #7a8288">{{data.deaths}}</span></td>
-                                                            <td><span style="color: #7a8288">{{data.kd}}</span></td>
-                                                        {% else %}
-                                                            <td class="left-col-t"></td>
-                                                            {% if data.tag %}
-                                                                <td><span style="color: rgb(216,144,41)">{{data.tag}}</span></td>
-                                                            {% else %}
-                                                                <td></td>
-                                                            {% endif %}
-                                                            <td class="t-name"><span style="color: rgb(216,144,41)">{{data.name}}</span></td>
-                                                            <td></td>
-                                                            <td><span style="color: rgb(216,144,41)">{{data.kills}}</span></td>
-                                                            <td><span style="color: rgb(216,144,41)">{{data.deaths}}</span></td>
-                                                            <td><span style="color: rgb(216,144,41)">{{data.kd}}</span></td>
-                                                        {% endif %}
-                                                        {% if data.mvp > 0 %}
-                                                            <td>&#x2b50;<sup style="color: rgb(240,180,18)">{{data.mvp}}</sup></td>
-                                                        {% else %}
-                                                            <td></td>
-                                                        {% endif %}
-                                                    </tr>
-                                                    {% endifequal %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" style="padding: 0px;">
-                                 <table class="table table-spec" style="margin-bottom: 5px; margin-top: 5px; border: black solid 0;">
+                            <div class="col-lg-12 no-gutter">
+                                 <table class="table table-spec" style="border: black solid 0;">
                                     <tbody>
                                       <tr>
                                         <td style="width: 1px;"></td>
-                                        <th style="width: 130px">Spectators ({{spec_player_count}}):</th>
+                                        <th style="width: 130px">Spectators ({{scoreboard.teams.1.player_count|add:scoreboard.teams.0.player_count}}):</th>
                                         <td style="width: 100%;">
                                         {% for steamid, data in scoreboard.players.items %}
                                             {% if data.team in specteams %}
@@ -318,52 +313,17 @@ table{
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <div class="row" style="width: 100%;">
-                                <div class="col-md-6" style="margin: 0;">
-                                    <span id="server" class="server-name">Server: {{scoreboard.hostname}}</span>
-                                    <p style="margin-bottom: 0"><strong class="item">Map: <span id="map" class="current-map"><em>{{scoreboard.map}}</em></span></strong></p>
-                                </div>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-1"></div>
-                                <div class="col-md-1">
-                                    <div class="col-md-1" style="padding: 0;">
-                                    <span id="round" class="current-round">Round: {{round_count}}</span>
-                                    <p style="margin-bottom: 0"><strong class="item">Players: <span id="player" class="player-count"><em>{{player_count}}/{{scoreboard.slots}}</em></span></strong></p>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="pull-left">
+                                        <span id="server" class="server-name">Server: {{scoreboard.hostname}}</span>
+                                        <p style="margin-bottom: 0"><strong class="item">Map: <span id="map" class="current-map"><em>{{scoreboard.map}}</em></span></strong></p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel-group">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Server Logs
-                            </div>
-                            <div class="panel-body">                       
-                                <textarea class="form-control" id="override-color" rows="15" style="margin-bottom: 15px" readonly>
-    {% for log_entry in scoreboard.logs %}{{log_entry}}
-    {% endfor %}
-    Logs for current date and time: </textarea>
-                                <div class="col-xs-2" style="padding: 0;">
-                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #3e444c; color: #eee">
-                                      Update Scoreboard and Serverlogs by Date and Time <span class="caret"></span>
-                                    </button>
-                                    <div class="dropdown-menu" id="click-option" aria-labelledby="btnGroupDrop1" style="width: 1%; background-color: #3e444c; ">
-                                      <a class="dropdown-item" id="option1" href="#"><span>Current Time </br></span></a>
-                                      <a class="dropdown-item" id="option2" href="#"><span>3/28/17 - 12:00:00 </br> </span></a>
-                                      <a class="dropdown-item" id="option3" href="#"><span>3/28/17 - 13:00:00 </br> </span></a>
-                                    </div>
-                                </div>
-                            </div>                            
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="pull-left"></div>
+                                <div class="col-sm-6">
+                                    <div class="pull-right">
+                                        <span id="round" class="current-round">Round: {{scoreboard.round_count}}</span>
+                                        <p style="margin-bottom: 0"><strong class="item">Players: <span id="player" class="player-count"><em>{{scoreboard.player_count}}/{{scoreboard.slots}}</em></span></strong></p>
                                     </div>
                                 </div>
                             </div>
@@ -372,6 +332,31 @@ table{
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Server Logs
+                        </div>
+                        <div class="panel-body">                      
+                            <textarea class="form-control" id="override-color" rows="15" style="margin-bottom: 15px" readonly>
+{% for log_entry in scoreboard.logs %} {{log_entry}} 
+{% endfor %}</textarea>
+                        </div>                            
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="pull-left"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
         <!-- /#page-content-wrapper -->
 </div>
@@ -379,197 +364,18 @@ table{
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="{% static 'stats/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'channels/js/websocketbridge.js' %}"></script>
 
 <script type="text/javascript">
 
-$(document).ready(function(){                        
-    $('#click-option #option1').click(function(){
-        var mystring = '{% for log_entry in scoreboard.logs %}{{log_entry}}\n{% endfor %}' + '\nLogs for current date and time: ' + Date();
-        $('#override-color').val(mystring);
-    }); 
-    $('#click-option #option2').click(function(){
-        $('#override-color').val({{round_count}});
-    }); 
+    const webSocketBridge = new channels.WebSocketBridge();
+    webSocketBridge.connect('/ws/');
+    webSocketBridge.listen();
+    webSocketBridge.socket.addEventListener('open', function(action, stream, msg) {
+        console.log("Connected to WebSocket");
+        console.log(action, msg);
+    })
 
-    //Media queries
-    if ($(window).innerWidth() >= 1200 && $(window).innerWidth() < 1800) {       
-        $('.tableheader4 h1').css("margin-left", "80px");
-
-        if ($(window).innerWidth() >= 1200 && $(window).innerWidth() < 1300){
-            $('.tableheader3 p').css("margin-left", "110px");
-            $('.tableheader6 p').css("margin-left", "60px");
-        }
-        else if ($(window).innerWidth() >= 1300 && $(window).innerWidth() < 1400){
-            $('.tableheader3 p').css("margin-left", "90px");
-            $('.tableheader6 p').css("margin-left", "50px");
-        }
-        else if ($(window).innerWidth() >= 1400 && $(window).innerWidth() < 1500){
-            $('.tableheader3 p').css("margin-left", "80px");
-            $('.tableheader6 p').css("margin-left", "40px");     
-        }
-        else if ($(window).innerWidth() >= 1500 && $(window).innerWidth() < 1600){
-            $('.tableheader3 p').css("margin-left", "60px");
-            $('.tableheader6 p').css("margin-left", "30px");
-        }
-        else if ($(window).innerWidth() >= 1600 && $(window).innerWidth() < 1700){
-            $('.tableheader3 p').css("margin-left", "45px");
-            $('.tableheader6 p').css("margin-left", "20px");
-        }
-        else if ($(window).innerWidth() >= 1700 && $(window).innerWidth() < 1800){
-            $('.tableheader3 p').css("margin-left", "30px");
-            $('.tableheader6 p').css("margin-left", "10px");
-        }
-    }
-
-    if ($(window).innerWidth() >= 1500){
-        $('.tableheader4 h1').css("margin-left", "0px");
-    }    
-
-    if ($(window).innerWidth() <= 1280) {
-        $('.left-head-ct').remove();
-        $('.left-col-ct').remove();
-        $('.left-head-t').remove();
-        $('.left-col-t').remove();
-    } 
-
-    if ($(window).innerWidth() <= 1199) {
-        $('.tableheader1').remove();
-        $('.tableheader2').css("width", "50%");
-        $('.tableheader2').css("padding-top", "12px");
-        $('.tableheader2').css("padding-right", "35px");
-        $('.tableheader2').append("<p style='margin:0; color: rgb(41,144,216);'><strong class='item'><span>Players Alive: </span></strong><em>{{ct_alive_count}}/{{ct_player_count}}</em></p>");
-        $('.tableheader3').remove();
-        $('.tableheader4').css("width", "25%");
-        $('.tableheader4').css("padding-bottom", "18px");
-        $('.tableheader5').css("width", "25%");
-        $('.tableheader5').css("padding-top", "12px");
-        $('.tableheader5').css("padding-left", "0");
-        $('.tableheader5').append('<p style="margin: 0; color: rgb(216,144,41);"><strong class="item"><span> Players Alive: </span></strong><em>{{t_alive_count}}/{{t_player_count}}</em></p>');
-        $('.tableheader6').remove();
-    } 
-
-    if ($(window).innerWidth() <= 680) {
-        $('.tableheader2').css("width", "50%");
-        $('.tableheader4').css("width", "22%");
-        $('.tableheader5').css("width", "28%");
-        $('.ct-name-head').css("padding-left", "4%");
-        $('.t-name-head').css("padding-left", "4%");
-        $('.ct-name').css("padding-left", "4%");
-        $('.t-name').css("padding-left", "4%");
-    } 
-});
-
-// Media queries on resize
-
-$(window).resize(function(){
-
-    if ($(window).innerWidth() >= 1200){
-        $('.tableheader4 h1').css("margin-left", "80px");
-
-        if ($(window).innerWidth() >= 1200 && $(window).innerWidth() < 1300){
-            marginleft = '110';
-            marginleft6 = '60';
-        }
-        else if ($(window).innerWidth() >= 1300 && $(window).innerWidth() < 1400){
-            marginleft = '90';
-            marginleft6 = '50';
-        }
-        else if ($(window).innerWidth() >= 1400 && $(window).innerWidth() < 1500){
-            marginleft = '80';  
-            marginleft6 = '40';     
-        }
-        else if ($(window).innerWidth() >= 1500 && $(window).innerWidth() < 1600){
-            marginleft = '60';
-            marginleft6 = '30';
-        }
-        else if ($(window).innerWidth() >= 1600 && $(window).innerWidth() < 1700){
-            marginleft = '45';
-            marginleft6 = '20';
-        }
-        else if ($(window).innerWidth() >= 1700 && $(window).innerWidth() < 1800){
-            marginleft = '30';
-            marginleft6 = '10';
-        }
-        else if ($(window).innerWidth() >= 1800){
-            marginleft = '0';
-            marginleft6 = '0';
-        }
-
-        var appendedstring = '<th class="tableheader3" style="width: 17.7%;"><p style="padding-left: 0; margin: 16px 0 0 ' + marginleft + 'px; color: rgb(41,144,216);"><strong class="item"><span>Players Alive: </span></strong><em>{{ct_alive_count}}/{{ct_player_count}}</em></p></th>';
-
-        var appendedstring2 = '<th class="tableheader6" style="width: 23.8%;"><p style="padding-left: 0; margin: 16px 0 0 ' + marginleft6 + 'px; color: rgb(216,144,41);"><strong class="item"><span> Players Alive: </span></strong><em>{{t_alive_count}}/{{t_player_count}}</em></p></th>'
-
-        $('.scoreboard-header').empty();
-        $('.scoreboard-header').append('<th class="tableheader1" style="width: 14%;"></th>');           
-        $('.scoreboard-header').append('<th class="tableheader2" style="width: 16%; padding-right: 4px;"><h1 style="margin: 0"> <span id="ct-title" class="ct-wins">{{scoreboard.teams.3}}</span></h1></th>');
-        $('.scoreboard-header').append(appendedstring);
-        $('.scoreboard-header').append('<th class="tableheader4" style="width: 20%;"><h1 style="margin: 0 0 0 80px;"> <span id="ct-round-wins" class="ct-wins">{{ct_round_wins}}</span> : <span id="t-round-wins" class="t-wins">{{t_round_wins}}</span></h1></th>');
-        $('.scoreboard-header').append('<th class="tableheader5" style="width: 8.5%; padding-right: 4px;"><h1 style="margin: 0"> <span id="t-title" class="t-wins">{{scoreboard.teams.2}}</span></h1></th>');
-        $('.scoreboard-header').append(appendedstring2);
-
-        if ($(window).innerWidth() >= 1800){
-            $('.tableheader3 p').css("margin-left", "0");
-            $('.tableheader6 p').css("margin-left", "0");
-        }
-    }    
-
-    if($(window).innerWidth() >= 1500){
-        $('.tableheader4 h1').css("margin-left", "0");
-    }
-
-    if ($(window).innerWidth() > 1280) {
-        if($('.left-head-ct').length == 0){
-            $('.ct-head-row').prepend('<th class="left-head-ct"></th>');
-            $('.ct-player').prepend('<td class="left-col-ct"></td>');
-            $('.t-head-row').prepend('<th class="left-head-t"></th>');
-            $('.t-player').prepend('<td class="left-col-t"></td>');
-        }
-    } 
-
-    if ($(window).innerWidth() <= 1280) {
-        $('.left-head-ct').remove();
-        $('.left-col-ct').remove();
-        $('.left-head-t').remove();
-        $('.left-col-t').remove();
-    } 
-
-    if ($(window).innerWidth() <= 1199) {
-        if($('.tableheader1').length != 0)
-        {
-            $('.tableheader1').remove();
-            $('.tableheader2').css("width", "50%");
-            $('.tableheader2').css("padding-top", "12px");
-            $('.tableheader2').css("padding-right", "35px");
-            $('.tableheader2').append("<p style='margin:0; color: rgb(41,144,216);'><strong class='item'><span>Players Alive: </span></strong><em>{{ct_alive_count}}/{{ct_player_count}}</em></p>");
-            $('.tableheader3').remove();
-            $('.tableheader4').css("width", "25%");
-            $('.tableheader4 h1').css("margin-left", "0");
-            $('.tableheader4').css("padding-bottom", "18px");
-            $('.tableheader5').css("width", "25%");
-            $('.tableheader5').css("padding-top", "12px");
-            $('.tableheader5').css("padding-left", "0");
-            $('.tableheader5').append('<p style="margin: 0; color: rgb(216,144,41);"><strong class="item"><span> Players Alive: </span></strong><em>{{t_alive_count}}/{{t_player_count}}</em></p>');
-            $('.tableheader6').remove();
-        }
-
-    } 
-
-    if ($(window).innerWidth() <= 680) {
-        $('.tableheader2').css("width", "50%");
-        $('.tableheader4').css("width", "22%");
-        $('.tableheader4 h1').css("margin-left", "0");
-        $('.tableheader5').css("width", "28%");
-        $('.ct-name-head').css("padding-left", "4%");
-        $('.t-name-head').css("padding-left", "4%");
-        $('.ct-name').css("padding-left", "4%");
-        $('.t-name').css("padding-left", "4%");
-    } 
-});
-
-</script>
-
-<script type="text/javascript">
-    document.getElementById('override-color').innerHTML += Date();
 </script>
 
 </body>
