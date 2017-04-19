@@ -9,7 +9,7 @@ a serverlog object is created and the webpage updates the information displayed 
 is handled by the websockets. All data since the first round is cached via the views.py using redis and the server is run on nginx. 
 The webpages are setup with html5, bootstrap css, and Javascript/JQuery for the frontend and Django Python handles all the backend. 
 
-What is done at the moment?: The webpage for "elevatedgaming.net:82/servers/3/stats" is already setup and is a responsive webpage, 
+What is done at the moment?: The webpage for "elevatedgaming.net:82/servers/4/stats" is already setup and is a responsive webpage, 
 meaning it displays well on screens of all sizes. At the moment what appears on the screen is based on mock JSON data inside of ServerLog 
 model objects created to test the functionality. The caching and display of data has proven to work as intended. 
 The only thing left is to setup the websockets correctly and on the to-do list is to create a system in which the scoreboard and displayed 
