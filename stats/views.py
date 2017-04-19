@@ -122,7 +122,19 @@ def serverstats(request, GameServer_id):
             pass #toimplement
 
         elif log.tag.name == "game_end":
-            pass #toimplement
+            for player, data in scoreboard["players"].items():
+                data["kills"] = 0
+                data["deaths"] = 0
+                data["mvp"] = 0
+                scoreboard["players"][player] = data
+
+            for team in scoreboard["teams"].keys():#.items():
+#                data["player_count"] = 0
+#                data["alive_count"] = 0
+#                data["score"] = 0
+                scoreboard["teams"][team]["score"] = 0
+
+            scoreboard["round_count"] = 0
 
         elif log.tag.name == "game_start":
             for player, data in scoreboard["players"].items():
