@@ -5,7 +5,7 @@ The particular webpage from the server list that is actively being worked on is 
 
 This webpage will be linked with an active gameserver in a video-game named "Counter-Strike: Source". 
 
-# NOTE: DO NOT BE ALARMED BY THE NAMES OF THE TEAMS, "COUNTER-TERRORISTS" AND "TERRORISTS", THESE ARE THE DEFAULT NAMES FOR TEAMS IN THIS SPECIFIC VIDEO GAME. 
+# Note: Do not be alarmed by the names of the teams, "COUNTER-TERRORISTS" and "TERRORISTS", These are the default names for teams in this specific video game.
 
 In this particular server it will retrieve all the necessary information for all active players connected on the server and display them with two methods: 
 
