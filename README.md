@@ -9,5 +9,12 @@ a serverlog object is created and the webpage updates the information displayed 
 is handled by the websockets. All data since the first round is cached via the views.py using redis and the server is run on nginx. 
 The webpages are setup with html5, bootstrap css, and Javascript/JQuery for the frontend and Django Python handles all the backend. 
 
-What is done at the moment?: The webpage for "elevatedgaming.net:82/servers/4/stats" is already setup and is a responsive webpage, 
-meaning it displays well on screens of all sizes. What appears on the screen is a live representation of what is happening on the game server. The caching and display of data has proven to work as intended. The websockets are completely operational and are connected correctly, one websocket for gameserver to webserver updating the database with information. Another websocket connects from the webserver to the client browser, updating the browser with information each time a message is passed from the game server to the webserver to the client.
+**********************
+What is done at the moment?
+**********************
+
+-The webpage for "elevatedgaming.net:82/servers/4/stats" is already setup and is a responsive webpage,
+-What appears on the screen is a live representation of what is happening on the game server
+-The caching and display of data has proven to work as intended 
+-The websockets are completely operational and are connected correctly, one websocket for gameserver to webserver updating the database with information 
+-Another websocket connects from the webserver to the client browser, updating the browser with information each time a message is passed from the game server to the webserver to the client
