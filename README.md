@@ -37,3 +37,8 @@ What is done at the moment?
 - The caching and display of data has proven to work as intended 
 - The websockets are completely operational and are connected correctly, one websocket for gameserver to webserver updating the database with information 
 - Another websocket connects from the webserver to the client browser, updating the browser with information each time a message is passed from the game server to the webserver to the client
+
+**********************
+Here is a screenshot of the website when it's running and the server is running.
+**********************
+![Image](https://github.com/SecretDan1994/ScoreboardDjangoProject/blob/master/Website%20Screenshot.png)
