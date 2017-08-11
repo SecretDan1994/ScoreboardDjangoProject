@@ -13,7 +13,7 @@ In this particular server it will retrieve all the necessary information for all
 2. Viewable logs, both of which will automatically update every time an event fires in the server.  
 
 **********************
-How it works 
+# How it works 
 **********************
 
 A python program in the server records information every time an event happens on the server and stores it in python 
@@ -29,7 +29,7 @@ All data since the first round is cached via the views.py using redis and the se
 The webpages are setup with html5, bootstrap css, and Javascript/JQuery for the frontend and Django Python handles all the backend. 
 
 **********************
-What is done at the moment?
+# What is done at the moment?
 **********************
 
 - The webpage for "elevatedgaming.net:82/servers/4/stats" is already setup and is a responsive webpage
@@ -39,6 +39,6 @@ What is done at the moment?
 - Another websocket connects from the webserver to the client browser, updating the browser with information each time a message is passed from the game server to the webserver to the client
 
 **********************
-Here is a screenshot of the website when it's running and the server is running.
+# Here is a screenshot of the website when it's running and the server is running.
 **********************
 ![Image](https://github.com/SecretDan1994/ScoreboardDjangoProject/blob/master/Website%20Screenshot.png)
