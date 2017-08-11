@@ -1,6 +1,16 @@
 # ScoreboardDjangoProject
-This Project involves the transfer of JSON data from programs used in specific gameservers for a community named "ElevatedGamingNetwork". 
-The particular webpage from the server list that is actively being worked on is gs1.elevatedgaming.net's page: "elevatedgaming.net:82/servers/4/stats". This webpage will be linked with an active gameserver in a video-game named "Counter-Strike: Source". NOTE: DO NOT BE ALARMED BY THE NAMES OF THE TEAMS, "COUNTER-TERRORISTS" AND "TERRORISTS", THESE ARE THE DEFAULT NAMES FOR TEAMS IN THIS SPECIFIC VIDEO GAME. In this particular server it will retrieve all the necessary information for all active players connected on the server and display them with two methods: 1. A Scoreboard and 2. Viewable logs, both of which will automatically update every time an event fires in the server.  
+This Project involves the transfer of JSON data from programs used in specific gameservers for a community named "ElevatedGamingNetwork".
+
+The particular webpage from the server list that is actively being worked on is gs1.elevatedgaming.net's page: "elevatedgaming.net:82/servers/4/stats". 
+
+This webpage will be linked with an active gameserver in a video-game named "Counter-Strike: Source". 
+
+# NOTE: DO NOT BE ALARMED BY THE NAMES OF THE TEAMS, "COUNTER-TERRORISTS" AND "TERRORISTS", THESE ARE THE DEFAULT NAMES FOR TEAMS IN THIS SPECIFIC VIDEO GAME. 
+
+In this particular server it will retrieve all the necessary information for all active players connected on the server and display them with two methods: 
+
+1. A Scoreboard
+2. Viewable logs, both of which will automatically update every time an event fires in the server.  
 
 **********************
 How it works 
