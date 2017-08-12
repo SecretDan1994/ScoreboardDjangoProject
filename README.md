@@ -41,4 +41,4 @@ The webpages are setup with html5, bootstrap css, and Javascript/JQuery for the 
 **********************
 # Here is a screenshot of the website when it's running and the server is running.
 **********************
-![Image](https://github.com/SecretDan1994/ScoreboardDjangoProject/blob/master/Website%20Screenshot.png)
+![Image](https://github.com/SecretDan1994/ScoreboardDjangoProject/blob/master/WebsiteScreenshot.png)
